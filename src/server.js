@@ -37,7 +37,7 @@ app.get("/", (req, res) => {
 });
 
 // PORTA
-const PORT = 5000;
+const PORT = process.env.PORT;
 
 app.listen(PORT, () => {
   console.log(`Servidor a correr na porta ${PORT}`);
