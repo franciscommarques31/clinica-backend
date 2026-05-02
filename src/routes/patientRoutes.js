@@ -5,6 +5,16 @@ const bcrypt = require("bcryptjs");
 const Patient = require("../models/Patient");
 const Invite = require("../models/Invite");
 
+// 🔒 LISTAR PACIENTES (ADMIN)  👈 ADICIONADO
+router.get("/", async (req, res) => {
+  try {
+    const patients = await Patient.find();
+    res.json(patients);
+  } catch (err) {
+    res.status(500).json({ message: "Erro ao buscar pacientes" });
+  }
+});
+
 // REGISTO COM TOKEN (CONVITE)
 router.post("/register/:token", async (req, res) => {
   try {

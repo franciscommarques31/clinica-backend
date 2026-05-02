@@ -1,7 +1,10 @@
 const mongoose = require("mongoose");
 
-module.exports = mongoose.model("Staff", {
-  name: String,
-  specialty: String,
-  photo: String
+const StaffSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  specialty: { type: String, required: true },
+  photo: { type: String },
+  role: { type: String, required: true } // medico ou assistente
 });
+
+module.exports = mongoose.model("Staff", StaffSchema);

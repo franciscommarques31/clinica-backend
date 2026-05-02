@@ -16,7 +16,13 @@ const inviteRoutes = require("./routes/inviteRoutes");
 const app = express();
 
 // MIDDLEWARES
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:5173',
+    'https://SEU-FRONTEND.vercel.app'
+  ],
+  credentials: true
+}));
 app.use(express.json());
 
 // LIGAR DB
