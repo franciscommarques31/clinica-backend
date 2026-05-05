@@ -19,7 +19,7 @@ const app = express();
 app.use(cors({
   origin: [
     'http://localhost:5173',
-    'https://SEU-FRONTEND.vercel.app'
+    'https://clinica-frontend-swart.vercel.app'
   ],
   credentials: true
 }));
