@@ -1,8 +1,23 @@
 const mongoose = require("mongoose");
 
-module.exports = mongoose.model("AppointmentRequest", {
+const AppointmentRequestSchema = new mongoose.Schema({
   name: String,
   email: String,
   phone: String,
-  message: String
+  message: String,
+
+  appointmentDate: Date,
+
+  appointmentTime: String,
+
+  status: {
+    type: String,
+    enum: ["pending", "confirmed", "cancelled"],
+    default: "pending"
+  }
 });
+
+module.exports = mongoose.model(
+  "AppointmentRequest",
+  AppointmentRequestSchema
+);
