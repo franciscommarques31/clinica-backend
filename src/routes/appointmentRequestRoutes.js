@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Model = require("../models/AppointmentRequest");
+const Patient = require("../models/Patient");
 
 router.get("/available-slots/:date", async (req, res) => {
   try {
@@ -116,24 +117,26 @@ router.delete("/:id", async (req, res) => {
 // CONFIRMAR PEDIDO
 router.put("/:id/confirm", async (req, res) => {
   try {
-
     const updated = await Model.findByIdAndUpdate(
       req.params.id,
-      {
-        status: "confirmed"
-      },
-      {
-        new: true
-      }
+      { status: "confirmed" },
+      { new: true }
     );
 
+    const existe = await Patient.findOne({ email: updated.email });
+
+    if (!existe) {
+      await new Patient({
+        name: updated.name,
+        email: updated.email,
+        phone: updated.phone,
+        registado: false
+      }).save();
+    }
+
     res.json(updated);
-
   } catch (err) {
-
-    res.status(500).json({
-      message: "Erro ao confirmar pedido"
-    });
+    res.status(500).json({ message: "Erro ao confirmar pedido" });
   }
 });
 
