@@ -19,9 +19,12 @@ const app = express();
 app.use(cors({
   origin: [
     'http://localhost:5173',
-    'https://clinica-frontend-swart.vercel.app'
+    'https://clinica-frontend-swart.vercel.app',
+    'https://clinica-frontend-swart.vercel.app/'
   ],
-  credentials: true
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 app.use(express.json());
 
