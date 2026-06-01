@@ -27,13 +27,13 @@ router.post("/patient-login", async (req, res) => {
 
   if (!patient) return res.status(400).json({ message: "Paciente não existe" });
 
+  if (!patient.password) return res.status(400).json({ message: "Conta não ativada" });
+
   const match = await bcrypt.compare(req.body.password, patient.password);
 
   if (!match) return res.status(400).json({ message: "Password errada" });
 
   const token = jwt.sign({ id: patient._id }, process.env.JWT_SECRET);
 
-  res.json({ token });
+  res.json({ token, id: patient._id, name: patient.name });
 });
-
-module.exports = router;
