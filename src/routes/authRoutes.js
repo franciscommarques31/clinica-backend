@@ -37,3 +37,5 @@ router.post("/patient-login", async (req, res) => {
 
   res.json({ token, id: patient._id, name: patient.name });
 });
+
+module.exports = router;
